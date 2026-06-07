@@ -8,7 +8,7 @@
 <img width="2538" height="1264" alt="image" src="https://github.com/user-attachments/assets/c7ed6377-73d9-4b11-a39c-3d6804f9d55e" />
 
 藏品列表页：
-<img width="2536" height="1267" alt="image" src="https://github.com/user-attachments/assets/41b336c3-29ba-40ba-b6c5-fde79e1ea680" />
+<img width="2533" height="1269" alt="image" src="https://github.com/user-attachments/assets/3a47df09-b3eb-4b44-b0ab-882c07ec9706" />
 
 藏品明细页：
 <img width="2535" height="1262" alt="image" src="https://github.com/user-attachments/assets/e5126e38-80e4-4abf-963e-0ae9a8d7fac9" />
