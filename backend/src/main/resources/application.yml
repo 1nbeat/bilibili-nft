@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: bilibili-nft-backend
+  profiles:
+    active: dev
+
+server:
+  port: 8080
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.arifun.domain
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  file:
+    name: logs/bilibili-nft-backend.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.arifun.mapper.BiliNftSeriesMapper">
+
+    <resultMap id="BiliNftSeriesResultMap" type="com.arifun.domain.BiliNftSeries">
+        <id column="id" property="id"/>
+        <result column="item_id" property="itemId"/>
+        <result column="item_name" property="itemName"/>
+        <result column="issuer_name" property="issuerName"/>
+        <result column="collection_total" property="collectionTotal"/>
+        <result column="is_private" property="privateFlag"/>
+        <result column="crawl_time" property="crawlTime"/>
+    </resultMap>
+
+    <select id="selectByItemId" resultMap="BiliNftSeriesResultMap">
+        SELECT id, item_id, item_name, issuer_name, collection_total, is_private, crawl_time
+        FROM bili_nft_series
+        WHERE item_id = #{itemId}
+        LIMIT 1
+    </select>
+
+    <insert id="insert" parameterType="com.arifun.domain.BiliNftSeries" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO bili_nft_series (
+            item_id,
+            item_name,
+            issuer_name,
+            collection_total,
+            is_private,
+            crawl_time
+        ) VALUES (
+            #{itemId},
+            #{itemName},
+            #{issuerName},
+            #{collectionTotal},
+            #{privateFlag},
+            #{crawlTime}
+        )
+    </insert>
+
+    <select id="selectAll" resultMap="BiliNftSeriesResultMap">
+        SELECT id, item_id, item_name, issuer_name, collection_total, is_private, crawl_time
+        FROM bili_nft_series
+        <where>
+            <if test="itemId != null">
+                item_id = #{itemId}
+            </if>
+            <if test="itemName != null and itemName != ''">
+                <if test="itemId != null">
+                    AND
+                </if>
+                item_name LIKE CONCAT('%', #{itemName}, '%')
+            </if>
+        </where>
+        ORDER BY RAND()
+    </select>
+</mapper>

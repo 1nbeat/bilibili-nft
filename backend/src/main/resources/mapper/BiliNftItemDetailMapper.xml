@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.arifun.mapper.BiliNftItemDetailMapper">
+
+    <resultMap id="BiliNftItemDetailResultMap" type="com.arifun.domain.BiliNftItemDetail">
+        <id column="id" property="id"/>
+        <result column="item_id" property="itemId"/>
+        <result column="nft_id" property="nftId"/>
+        <result column="nft_name" property="nftName"/>
+        <result column="serial_number" property="serialNumber"/>
+        <result column="serial_no" property="serialNo"/>
+        <result column="serial_total" property="serialTotal"/>
+        <result column="nft_address" property="nftAddress"/>
+        <result column="image_url" property="imageUrl"/>
+        <result column="animation_url" property="animationUrl"/>
+        <result column="html_url" property="htmlUrl"/>
+        <result column="model_text" property="modelText"/>
+        <result column="owner_mid" property="ownerMid"/>
+        <result column="owner_name" property="ownerName"/>
+        <result column="owner_avatar_url" property="ownerAvatarUrl"/>
+        <result column="owner_tx_hash" property="ownerTxHash"/>
+        <result column="owner_tx_time" property="ownerTxTime"/>
+        <result column="owner_expire_time" property="ownerExpireTime"/>
+        <result column="issue_author" property="issueAuthor"/>
+        <result column="issue_issuer" property="issueIssuer"/>
+        <result column="issue_time" property="issueTime"/>
+        <result column="issue_number" property="issueNumber"/>
+        <result column="description" property="description"/>
+        <result column="attributes_json" property="attributesJson"/>
+        <result column="crawl_time" property="crawlTime"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id,
+        item_id,
+        nft_id,
+        nft_name,
+        serial_number,
+        serial_no,
+        serial_total,
+        nft_address,
+        image_url,
+        animation_url,
+        html_url,
+        model_text,
+        owner_mid,
+        owner_name,
+        owner_avatar_url,
+        owner_tx_hash,
+        owner_tx_time,
+        owner_expire_time,
+        issue_author,
+        issue_issuer,
+        issue_time,
+        issue_number,
+        description,
+        attributes_json,
+        crawl_time
+    </sql>
+
+    <insert id="upsert" parameterType="com.arifun.domain.BiliNftItemDetail">
+        INSERT INTO bili_nft_item_detail (
+            item_id,
+            nft_id,
+            nft_name,
+            serial_number,
+            serial_no,
+            serial_total,
+            nft_address,
+            image_url,
+            animation_url,
+            html_url,
+            model_text,
+            owner_mid,
+            owner_name,
+            owner_avatar_url,
+            owner_tx_hash,
+            owner_tx_time,
+            owner_expire_time,
+            issue_author,
+            issue_issuer,
+            issue_time,
+            issue_number,
+            description,
+            attributes_json,
+            crawl_time
+        ) VALUES (
+            #{itemId},
+            #{nftId},
+            #{nftName},
+            #{serialNumber},
+            #{serialNo},
+            #{serialTotal},
+            #{nftAddress},
+            #{imageUrl},
+            #{animationUrl},
+            #{htmlUrl},
+            #{modelText},
+            #{ownerMid},
+            #{ownerName},
+            #{ownerAvatarUrl},
+            #{ownerTxHash},
+            #{ownerTxTime},
+            #{ownerExpireTime},
+            #{issueAuthor},
+            #{issueIssuer},
+            #{issueTime},
+            #{issueNumber},
+            #{description},
+            #{attributesJson},
+            #{crawlTime}
+        )
+        ON DUPLICATE KEY UPDATE
+            item_id = VALUES(item_id),
+            nft_name = VALUES(nft_name),
+            serial_number = VALUES(serial_number),
+            serial_no = VALUES(serial_no),
+            serial_total = VALUES(serial_total),
+            nft_address = VALUES(nft_address),
+            image_url = VALUES(image_url),
+            animation_url = VALUES(animation_url),
+            html_url = VALUES(html_url),
+            model_text = VALUES(model_text),
+            owner_mid = VALUES(owner_mid),
+            owner_name = VALUES(owner_name),
+            owner_avatar_url = VALUES(owner_avatar_url),
+            owner_tx_hash = VALUES(owner_tx_hash),
+            owner_tx_time = VALUES(owner_tx_time),
+            owner_expire_time = VALUES(owner_expire_time),
+            issue_author = VALUES(issue_author),
+            issue_issuer = VALUES(issue_issuer),
+            issue_time = VALUES(issue_time),
+            issue_number = VALUES(issue_number),
+            description = VALUES(description),
+            attributes_json = VALUES(attributes_json),
+            crawl_time = VALUES(crawl_time)
+    </insert>
+
+    <select id="selectByNftId" resultMap="BiliNftItemDetailResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM bili_nft_item_detail
+        WHERE nft_id = #{nftId}
+        LIMIT 1
+    </select>
+
+    <select id="selectByNftIds" resultMap="BiliNftItemDetailResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM bili_nft_item_detail
+        WHERE nft_id IN
+        <foreach collection="nftIds" item="nftId" open="(" separator="," close=")">
+            #{nftId}
+        </foreach>
+        ORDER BY serial_no ASC, id ASC
+    </select>
+</mapper>

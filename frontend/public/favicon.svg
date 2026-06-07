@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="BiliBili NFT">
+  <defs>
+    <linearGradient id="shell" x1="18" y1="18" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00a1d6"/>
+      <stop offset="0.54" stop-color="#2682df"/>
+      <stop offset="1" stop-color="#fb7299"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="34" y1="42" x2="94" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1187d8"/>
+      <stop offset="1" stop-color="#315ac2"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="#ffffff"/>
+  <path d="M42 17 56 35M86 17 72 35" fill="none" stroke="#00a1d6" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="40" cy="16" r="6" fill="#00a1d6"/>
+  <circle cx="88" cy="16" r="6" fill="#fb7299"/>
+  <rect x="18" y="32" width="92" height="78" rx="24" fill="url(#shell)"/>
+  <rect x="29" y="43" width="70" height="56" rx="16" fill="url(#screen)" stroke="#ff9fca" stroke-width="4"/>
+  <path d="M43 58h14v10h10M45 79h18v10h10M74 56v13h14M77 87h13V75h8" fill="none" stroke="#8ee7ff" stroke-width="2.4" stroke-linecap="round" opacity="0.52"/>
+  <text x="45" y="84" fill="#ff95c2" font-family="Arial Black, Arial, sans-serif" font-size="45" font-weight="900">N</text>
+</svg>

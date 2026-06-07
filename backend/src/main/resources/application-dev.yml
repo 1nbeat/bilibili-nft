@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/bilibili_nft_dev?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: your_dev_username
+    password: your_dev_password
+    hikari:
+      initialization-fail-timeout: 0
+
+logging:
+  level:
+    root: info
+    com.arifun: debug

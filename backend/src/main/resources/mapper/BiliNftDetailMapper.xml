@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.arifun.mapper.BiliNftDetailMapper">
+
+    <resultMap id="BiliNftDetailResultMap" type="com.arifun.domain.BiliNftDetail">
+        <id column="id" property="id"/>
+        <result column="item_id" property="itemId"/>
+        <result column="item_name" property="itemName"/>
+        <result column="issuer_name" property="issuerName"/>
+        <result column="collection_total" property="collectionTotal"/>
+        <result column="is_private" property="privateFlag"/>
+        <result column="serial_number" property="serialNumber"/>
+        <result column="serial_no" property="serialNo"/>
+        <result column="serial_total" property="serialTotal"/>
+        <result column="token_id" property="tokenId"/>
+        <result column="nft_id" property="nftId"/>
+        <result column="nft_type" property="nftType"/>
+        <result column="mid" property="mid"/>
+        <result column="username" property="username"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="image_url" property="imageUrl"/>
+        <result column="animation_url" property="animationUrl"/>
+        <result column="crawl_time" property="crawlTime"/>
+    </resultMap>
+
+    <resultMap id="BiliNftImageResultMap" type="com.arifun.domain.BiliNftImage">
+        <result column="item_id" property="itemId"/>
+        <result column="nft_id" property="nftId"/>
+        <result column="image_url" property="imageUrl"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id,
+        item_id,
+        item_name,
+        issuer_name,
+        collection_total,
+        is_private,
+        serial_number,
+        serial_no,
+        serial_total,
+        token_id,
+        nft_id,
+        nft_type,
+        mid,
+        username,
+        avatar_url,
+        image_url,
+        animation_url,
+        crawl_time
+    </sql>
+
+    <insert id="insert" parameterType="com.arifun.domain.BiliNftDetail" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO bili_nft_detail (
+            item_id,
+            item_name,
+            issuer_name,
+            collection_total,
+            is_private,
+            serial_number,
+            serial_no,
+            serial_total,
+            token_id,
+            nft_id,
+            nft_type,
+            mid,
+            username,
+            avatar_url,
+            image_url,
+            animation_url,
+            crawl_time
+        ) VALUES (
+            #{itemId},
+            #{itemName},
+            #{issuerName},
+            #{collectionTotal},
+            #{privateFlag},
+            #{serialNumber},
+            #{serialNo},
+            #{serialTotal},
+            #{tokenId},
+            #{nftId},
+            #{nftType},
+            #{mid},
+            #{username},
+            #{avatarUrl},
+            #{imageUrl},
+            #{animationUrl},
+            #{crawlTime}
+        )
+    </insert>
+
+    <insert id="upsert" parameterType="com.arifun.domain.BiliNftDetail">
+        INSERT INTO bili_nft_detail (
+            item_id,
+            item_name,
+            issuer_name,
+            collection_total,
+            is_private,
+            serial_number,
+            serial_no,
+            serial_total,
+            token_id,
+            nft_id,
+            nft_type,
+            mid,
+            username,
+            avatar_url,
+            image_url,
+            animation_url,
+            crawl_time
+        ) VALUES (
+            #{itemId},
+            #{itemName},
+            #{issuerName},
+            #{collectionTotal},
+            #{privateFlag},
+            #{serialNumber},
+            #{serialNo},
+            #{serialTotal},
+            #{tokenId},
+            #{nftId},
+            #{nftType},
+            #{mid},
+            #{username},
+            #{avatarUrl},
+            #{imageUrl},
+            #{animationUrl},
+            #{crawlTime}
+        )
+        ON DUPLICATE KEY UPDATE
+            item_name = VALUES(item_name),
+            issuer_name = VALUES(issuer_name),
+            collection_total = VALUES(collection_total),
+            is_private = VALUES(is_private),
+            serial_number = VALUES(serial_number),
+            serial_no = VALUES(serial_no),
+            serial_total = VALUES(serial_total),
+            token_id = VALUES(token_id),
+            nft_type = VALUES(nft_type),
+            mid = VALUES(mid),
+            username = VALUES(username),
+            avatar_url = VALUES(avatar_url),
+            image_url = VALUES(image_url),
+            animation_url = VALUES(animation_url),
+            crawl_time = VALUES(crawl_time)
+    </insert>
+
+    <update id="updateById" parameterType="com.arifun.domain.BiliNftDetail">
+        UPDATE bili_nft_detail
+        SET item_id = #{itemId},
+            item_name = #{itemName},
+            issuer_name = #{issuerName},
+            collection_total = #{collectionTotal},
+            is_private = #{privateFlag},
+            serial_number = #{serialNumber},
+            serial_no = #{serialNo},
+            serial_total = #{serialTotal},
+            token_id = #{tokenId},
+            nft_id = #{nftId},
+            nft_type = #{nftType},
+            mid = #{mid},
+            username = #{username},
+            avatar_url = #{avatarUrl},
+            image_url = #{imageUrl},
+            animation_url = #{animationUrl},
+            crawl_time = #{crawlTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM bili_nft_detail
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByItemId">
+        DELETE FROM bili_nft_detail
+        WHERE item_id = #{itemId}
+    </delete>
+
+    <select id="selectById" resultMap="BiliNftDetailResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM bili_nft_detail
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectAll" resultMap="BiliNftDetailResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM bili_nft_detail
+        ORDER BY id DESC
+    </select>
+
+    <select id="selectPageByItemId" resultMap="BiliNftDetailResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM bili_nft_detail
+        WHERE item_id = #{itemId}
+        ORDER BY serial_no ASC, id ASC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countByItemId" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM bili_nft_detail
+        WHERE item_id = #{itemId}
+    </select>
+
+    <select id="selectRandomImagesByItemId" resultMap="BiliNftImageResultMap">
+        SELECT item_id, nft_id, image_url
+        FROM bili_nft_detail
+        WHERE item_id = #{itemId}
+          AND image_url IS NOT NULL
+          AND image_url != ''
+        ORDER BY RAND()
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectRandomImagesByItemIds" resultMap="BiliNftImageResultMap">
+        <foreach collection="itemIds" item="itemId" separator=" UNION ALL ">
+            (
+                SELECT item_id, nft_id, image_url
+                FROM bili_nft_detail
+                WHERE item_id = #{itemId}
+                  AND image_url IS NOT NULL
+                  AND image_url != ''
+                ORDER BY RAND()
+                LIMIT #{limit}
+            )
+        </foreach>
+    </select>
+
+    <select id="selectPage" resultMap="BiliNftDetailResultMap">
+        SELECT <include refid="BaseColumns"/>
+        FROM bili_nft_detail
+        ORDER BY id DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countAll" resultType="java.lang.Long">
+        SELECT COUNT(1)
+        FROM bili_nft_detail
+    </select>
+</mapper>
